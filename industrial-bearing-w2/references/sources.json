@@ -1,0 +1,181 @@
+{
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Shigley Mechanical Engineering Design 8e，第559-560页，表11-1；565-566页变载与Miner",
+      "url": "https://www.svu.edu.eg/faculties/eng/wp-content/uploads/2020/03/تصميم-ميكانيكى-المحاضرة-13.pdf",
+      "pages": [
+        11,
+        12,
+        17,
+        18
+      ],
+      "transcription": {
+        "table_index": "Fa/C0",
+        "x": [
+          0.014,
+          0.021,
+          0.028,
+          0.042,
+          0.056,
+          0.07,
+          0.084,
+          0.11,
+          0.17,
+          0.28,
+          0.42,
+          0.56
+        ],
+        "e": [
+          0.19,
+          0.21,
+          0.22,
+          0.24,
+          0.26,
+          0.27,
+          0.28,
+          0.3,
+          0.34,
+          0.38,
+          0.42,
+          0.44
+        ],
+        "X1": 1,
+        "Y1": 0,
+        "X2": 0.56,
+        "Y2": [
+          2.3,
+          2.15,
+          1.99,
+          1.85,
+          1.71,
+          1.63,
+          1.55,
+          1.45,
+          1.31,
+          1.15,
+          1.04,
+          1.0
+        ],
+        "lower_rule": "Use 0.014 if Fa/C0 < 0.014",
+        "branch": "Fa/(VFr)<=e: P=VFr; otherwise P=X2*VFr+Y2*Fa",
+        "rotation": "V=1内圈旋转；V=1.2外圈旋转",
+        "limitations": "X/Y取决于轴承几何；此为教材一般设计表，不能称厂家特定产品精确值。表内线性插值，低端按脚注，上端超界缺口。"
+      }
+    },
+    {
+      "id": "S2",
+      "title": "机械设计第三版，第209-212页；表8-7与式8-2、8-7",
+      "url": null,
+      "pages": [
+        223,
+        224,
+        225,
+        226
+      ],
+      "transcription": {
+        "life": "Lh=10^6/(60*n)*(ft*C/P)^epsilon；球epsilon=3，<=120°C ft=1",
+        "load_factor": "P=fp*(XFr+YFa)，理论力先查系数后按教材式8-7乘一次fp",
+        "interpolation": "表8-7注1:相对轴向载荷中间值X、Y、e可线性内插",
+        "index": "iFa/C0r，i为滚动体列数，单列i=1",
+        "print_issue": "第210页深沟球表首行印0.14，与后续0.028顺序冲突；不直接修此源，执行S1完整表及其明确低端规则",
+        "shock_factor": "中等冲击fp推荐1.2至1.8；实际题给优先"
+      }
+    },
+    {
+      "id": "S3",
+      "title": "LYC single-row deep groove dynamic load",
+      "url": "https://www.lycbearing.com/bearing-basic-knowledge/equivalent-dynamic-load-deep-groove-ball-bearings.html",
+      "pages": null,
+      "transcription": {
+        "branch": "Fa/Fr<=e: P=Fr; >e: P=XFr+YFa",
+        "manufacturer_index": "厂家表包含f0的相对轴载，不能把首列0.172等当Fa/C0。缺f0不能使用此厂家表数值。",
+        "clearance": "径向内部游隙影响动载系数，较大游隙的轴载能力变化。仅用此来源核对分支结构；本轮执行S1一般表。"
+      }
+    },
+    {
+      "id": "S4",
+      "title": "LYC Equivalent static loading Deep Groove Ball Bearings",
+      "url": "https://www.lycbearing.com/bearing-basic-knowledge/equivalent-static-loading-deep-groove-ball-bearings.html",
+      "pages": null,
+      "transcription": {
+        "equation": "P0=max(Fr,0.6Fr+0.5Fa)",
+        "use": "静载公式固定，不能用动态Y替换0.5"
+      }
+    },
+    {
+      "id": "S5",
+      "title": "NSK Bearing life calculation tool help, reliability factor a1",
+      "url": "https://www.nsk.com/engineering/knowledge-base/bearing-life-calculation-tool--contents-of-help-in-new-life-calculation-equation-/",
+      "pages": null,
+      "transcription": {
+        "reliability_percent": [
+          90,
+          95,
+          96,
+          97,
+          98,
+          99
+        ],
+        "NSK_ABLE_traditional": [
+          1,
+          0.62,
+          0.53,
+          0.44,
+          0.33,
+          0.21
+        ],
+        "ISO281_2007": [
+          1,
+          0.64,
+          0.55,
+          0.47,
+          0.37,
+          0.25
+        ],
+        "modified_equation": "Lnm=a1*aISO*L10",
+        "use": "只比较可靠度时列a1*L10；缺润滑污染等不能任意生成aISO。Tallian称呼未在该来源出现，题目未给版本时将两列分别标注。"
+      }
+    },
+    {
+      "id": "S6",
+      "title": "SKF Rolling bearings 17000_1 EN, page106 table7",
+      "url": "https://www.skf.com/binaries/pub12/Images/0901d196802809de-Rolling-bearings---17000_1-EN_tcm_12-121486.pdf",
+      "pages": null,
+      "transcription": {
+        "equation": "s0=C0/P0",
+        "continuous_motion_high_certainty": {
+          "deformation_accepted": 0.5,
+          "some": 1,
+          "none": 2
+        },
+        "continuous_motion_low_certainty_peak_loading": {
+          "deformation_accepted": 1.5,
+          "some": 1.5,
+          "none": 2
+        },
+        "selection": "可选s0_req=2为本轮有冲击的保守设计标准；输入力如不是实际峰值，应另报允许峰值放大倍数。"
+      }
+    },
+    {
+      "id": "support_equilibrium_derivation",
+      "type": "independent_static_equilibrium",
+      "content": "独立平衡推导：以齿轮径向力与切向力为两正交横向平面。跨度L，齿轮距A为a，齿轮直径d；d、a、L单位一致。A切向反力=Ft*(L-a)/L，A径向平面反力=Fr*(L-a)/L±Fa*d/(2L)，B的力矩项取反号，两个支承反力之和等于外力。合成轴承径向载荷为两平面反力的平方和开方。明确轴向定位/浮动条件；B为轴向浮动端时轴向力由A承担，只有drive/free描述而无结构图时标注此模型假设；力偶方向不明时列±分支并比较寿命，不能删去力偶。"
+    },
+    {
+      "id": "bearing-shaft",
+      "title": "Reusable bearing and two-support shaft relations",
+      "relations": "execution-contract.json: relation_signatures",
+      "sources": [
+        "S1",
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S6",
+        "support_equilibrium_derivation"
+      ]
+    }
+  ],
+  "verification": "Reused previously verified source extracts; no new external verification in this engineering revision."
+}

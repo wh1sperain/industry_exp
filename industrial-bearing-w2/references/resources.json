@@ -1,0 +1,298 @@
+{
+  "generic_Fa_C0_table": {
+    "source_id": "S1",
+    "version": "r25-verified-v1",
+    "locator": "table 11-1 rows/columns x,e,X2,Y2",
+    "sha256": "970932309a469b8d559cab56385ed880cd2d2fd2103723cf4f9e8152c759c291",
+    "quantity": {
+      "value": {
+        "index": "Fa/C0",
+        "lower_rule": "clamp_first",
+        "rows": [
+          {
+            "x": 0.014,
+            "e": 0.19,
+            "X": 0.56,
+            "Y": 2.3
+          },
+          {
+            "x": 0.021,
+            "e": 0.21,
+            "X": 0.56,
+            "Y": 2.15
+          },
+          {
+            "x": 0.028,
+            "e": 0.22,
+            "X": 0.56,
+            "Y": 1.99
+          },
+          {
+            "x": 0.042,
+            "e": 0.24,
+            "X": 0.56,
+            "Y": 1.85
+          },
+          {
+            "x": 0.056,
+            "e": 0.26,
+            "X": 0.56,
+            "Y": 1.71
+          },
+          {
+            "x": 0.07,
+            "e": 0.27,
+            "X": 0.56,
+            "Y": 1.63
+          },
+          {
+            "x": 0.084,
+            "e": 0.28,
+            "X": 0.56,
+            "Y": 1.55
+          },
+          {
+            "x": 0.11,
+            "e": 0.3,
+            "X": 0.56,
+            "Y": 1.45
+          },
+          {
+            "x": 0.17,
+            "e": 0.34,
+            "X": 0.56,
+            "Y": 1.31
+          },
+          {
+            "x": 0.28,
+            "e": 0.38,
+            "X": 0.56,
+            "Y": 1.15
+          },
+          {
+            "x": 0.42,
+            "e": 0.42,
+            "X": 0.56,
+            "Y": 1.04
+          },
+          {
+            "x": 0.56,
+            "e": 0.44,
+            "X": 0.56,
+            "Y": 1.0
+          }
+        ]
+      },
+      "unit": "table",
+      "quantity_type": "coefficient_table"
+    }
+  },
+  "NSK_ABLE_traditional.a1.90": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/90",
+    "sha256": "b8e9191dd3c39581486924d596cadcb08140fa37d31edb4519a4994ccf0dbe86",
+    "quantity": {
+      "value": 1,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=90",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "NSK_ABLE_traditional.a1.95": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/95",
+    "sha256": "adc8bef5c15987835ff82a2b67b56ca8edf3c5fc80c5922b5ea97b0123cf47e3",
+    "quantity": {
+      "value": 0.62,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=95",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "NSK_ABLE_traditional.a1.96": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/96",
+    "sha256": "b8e163417e7d1fff49af5fb8f9d60aabefa7206b2e85a6faba2391a79840b3ad",
+    "quantity": {
+      "value": 0.53,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=96",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "NSK_ABLE_traditional.a1.97": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/97",
+    "sha256": "2a7d9b8e33cec605d61c4c7181b130800b6462178fd607183a11d2e424c9486b",
+    "quantity": {
+      "value": 0.44,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=97",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "NSK_ABLE_traditional.a1.98": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/98",
+    "sha256": "7378595584d1eacecb03b2b75bfae5ac750e1a8178c1465abbea5b7965b6bf64",
+    "quantity": {
+      "value": 0.33,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=98",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "NSK_ABLE_traditional.a1.99": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "NSK_ABLE_traditional/99",
+    "sha256": "c9a1a116f6243549d2e0a8b282beabce916d4f2525d5128eec09782c27288a84",
+    "quantity": {
+      "value": 0.21,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=99",
+        "version=NSK_ABLE_traditional"
+      ]
+    }
+  },
+  "ISO281_2007.a1.90": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/90",
+    "sha256": "f2ef18f5d23b7aa253ad90f80a99a6999a0a9466db074b49b4721bff74357201",
+    "quantity": {
+      "value": 1,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=90",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "ISO281_2007.a1.95": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/95",
+    "sha256": "8dd26b2587d029aea0792b868d36d54c040815cd23315a4eb1a2befe0db4ad72",
+    "quantity": {
+      "value": 0.64,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=95",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "ISO281_2007.a1.96": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/96",
+    "sha256": "d5a0932a17ccfe64196903943cb530da0a5eb7cb506599e7fbbb85ce6ca2d2b3",
+    "quantity": {
+      "value": 0.55,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=96",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "ISO281_2007.a1.97": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/97",
+    "sha256": "73bc3852be1406ae70bc5748454514f14d5ebccd67b7df8f49c94d7f8f7a2e08",
+    "quantity": {
+      "value": 0.47,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=97",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "ISO281_2007.a1.98": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/98",
+    "sha256": "04b46b84de7cb56bb52269944c6e66fe365230b902eaa04aa0440e525a4f2bea",
+    "quantity": {
+      "value": 0.37,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=98",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "ISO281_2007.a1.99": {
+    "source_id": "S5",
+    "version": "r25-verified-v1",
+    "locator": "ISO281_2007/99",
+    "sha256": "3bbc5dbcb91ca89219717a4c92b4d257bfe6ac47e2aa6c46a60f09c5a43c6924",
+    "quantity": {
+      "value": 0.25,
+      "unit": "1",
+      "quantity_type": "reliability_factor",
+      "conditions": [
+        "reliability_percent=99",
+        "version=ISO281_2007"
+      ]
+    }
+  },
+  "rotation_inner": {
+    "source_id": "S1",
+    "version": "r25-verified-v1",
+    "locator": "rotation convention",
+    "quantity": {
+      "value": 1,
+      "unit": "1",
+      "quantity_type": "rotation_factor",
+      "conditions": [
+        "inner ring rotates with analyzed shaft"
+      ]
+    },
+    "sha256": "bf21e7ea105d6d5d3747c000f67c715e5c4f38d19ee3e85e58c332798cf2f6f6"
+  },
+  "load_factor_unity": {
+    "source_id": "S1",
+    "version": "r25-verified-v1",
+    "locator": "unfactored actual steady load",
+    "quantity": {
+      "value": 1,
+      "unit": "1",
+      "quantity_type": "load_factor",
+      "conditions": [
+        "actual steady loads; no additional given load factor"
+      ]
+    },
+    "sha256": "4dfcd40662953c71759e15398aaaf0f271c5e3b265173a49fe5e6f7f5dbdfe52"
+  }
+}

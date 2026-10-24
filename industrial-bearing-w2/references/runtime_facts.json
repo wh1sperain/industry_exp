@@ -1,0 +1,692 @@
+{
+  "scope": "ordinary single-row deep-groove bearings, given capacities, single steady load",
+  "relations": {
+    "gear_forces": {
+      "inputs": {
+        "power": "power",
+        "speed": "shaft_speed",
+        "diameter": "diameter",
+        "pressure_angle": "normal_pressure_angle",
+        "helix_angle": "helix_angle"
+      },
+      "outputs": {
+        "torque": "moment",
+        "Ft": "force",
+        "Fr": "radial_load",
+        "Fa": "axial_load",
+        "Fy": "force",
+        "Fz": "force"
+      },
+      "formula": "T=P/(2*pi*n/60); Ft=2*T/d; Fr=Ft*tan(alpha_n)/cos(beta); Fa=abs(Ft*tan(beta)); Fy=-Fr; Fz=-Ft",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Single external helical gear, explicit analyzed shaft speed. x along shaft; external Fy=-Fr, Fz=-Ft.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "axial_force_couple": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "diameter": "diameter",
+        "direction": "direction"
+      },
+      "outputs": {
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "formula": "r cross F: My=0; Mz=sign*Fa*d/2",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Contact offset is in y plane; record coordinate convention; unknown direction requires both signs.",
+      "enums": {
+        "direction": [
+          "positive",
+          "negative"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "shaft_reactions_two_supports": {
+      "inputs": {
+        "span": "span",
+        "position": "position",
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "outputs": {
+        "RAy": "force",
+        "RBy": "force",
+        "RAz": "force",
+        "RBz": "force",
+        "FrA": "radial_load",
+        "FrB": "radial_load"
+      },
+      "formula": "RBy=-(a*Fy+Mz)/L; RBz=(-a*Fz+My)/L; RA=-F-RB; Fr=hypot(Ry,Rz)",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "One applied transverse load, 0<=a<=L; all two-plane loads and free couples required.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "resolve_axial_loads": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "locating_end": "locating_end"
+      },
+      "outputs": {
+        "FaA": "axial_load",
+        "FaB": "axial_load"
+      },
+      "formula": "Locating end carries all external axial load; floating end carries zero",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Explicit locating/floating evidence. No induced-thrust formulas for other bearing types.",
+      "enums": {
+        "locating_end": [
+          "A",
+          "B"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "lookup_coefficients": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "static_capacity": "static_capacity",
+        "table": "coefficient_table"
+      },
+      "outputs": {
+        "e": "coefficient",
+        "X": "coefficient",
+        "Y": "coefficient",
+        "index": "ratio",
+        "interpolation": "report"
+      },
+      "formula": "x=Fa/C0; interpolate table with its exact index and registered endpoint policy",
+      "sources": [
+        "S1",
+        "S3"
+      ],
+      "domain": "Ordinary single-row deep-groove ball; question table takes precedence. No f0 substitution or upper extrapolation.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "equivalent_dynamic_load": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "axial_load": "axial_load",
+        "rotation_factor": "rotation_factor",
+        "e": "coefficient",
+        "X": "coefficient",
+        "Y": "coefficient",
+        "load_factor": "load_factor"
+      },
+      "outputs": {
+        "P": "equivalent_dynamic_load",
+        "branch": "label"
+      },
+      "formula": "P=fp*(V*Fr if Fa<=e*V*Fr else X*V*Fr+Y*Fa)",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "domain": "Load factor applied once; capacities are not applied loads.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "bearing_life_hours": {
+      "inputs": {
+        "dynamic_capacity": "dynamic_capacity",
+        "equivalent_load": "equivalent_dynamic_load",
+        "speed": "shaft_speed"
+      },
+      "outputs": {
+        "L10h": "life_hours"
+      },
+      "formula": "L10h=1e6/(60*n)*(C/P)^3",
+      "sources": [
+        "S2",
+        "bearing-shaft"
+      ],
+      "domain": "Ball bearings; C,P,n>0; 90 percent reliability.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "reliability_life": {
+      "inputs": {
+        "basic_life": "life_hours",
+        "factor": "reliability_factor"
+      },
+      "outputs": {
+        "LRh": "life_hours"
+      },
+      "formula": "LRh=a1*L10h",
+      "sources": [
+        "S5"
+      ],
+      "domain": "0<a1<=1, explicit source/table version; no unprovided aISO.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "equivalent_static_load": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "axial_load": "axial_load",
+        "static_capacity": "static_capacity"
+      },
+      "outputs": {
+        "P0": "equivalent_static_load",
+        "s0": "safety_factor"
+      },
+      "formula": "P0=max(Fr,.6*Fr+.5*Fa); s0=C0/P0",
+      "sources": [
+        "S4",
+        "S6"
+      ],
+      "domain": "Ordinary deep-groove ball; actual load; no invented acceptance threshold.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "required_dynamic_rating": {
+      "inputs": {
+        "target_hours": "target_hours",
+        "equivalent_load": "equivalent_dynamic_load",
+        "speed": "shaft_speed",
+        "factor": "reliability_factor"
+      },
+      "outputs": {
+        "C_required": "dynamic_capacity"
+      },
+      "formula": "Cmin=P*(H*60*n/(a1*1e6))^(1/3)",
+      "sources": [
+        "S2",
+        "S5"
+      ],
+      "domain": "Capacity requirement only; no catalog selection.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "check_equilibrium": {
+      "inputs": {
+        "span": "span",
+        "position": "position",
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment",
+        "RAy": "force",
+        "RBy": "force",
+        "RAz": "force",
+        "RBz": "force"
+      },
+      "outputs": {
+        "residuals": "report"
+      },
+      "formula": "Check both forces and moments against the independently bound load inventory",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "A zero residual does not by itself prove input completeness.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "geometry_position": {
+      "inputs": {
+        "span": "span",
+        "numeric_position": "position",
+        "geometry": "geometry"
+      },
+      "outputs": {
+        "position": "position"
+      },
+      "formula": "a=L/2 or explicit numeric position",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Conditional interpretation of explicit midpoint wording, kept separate from numeric dimensions.",
+      "enums": {
+        "geometry": [
+          "midpoint",
+          "numeric"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "transverse_components": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "plane": "plane"
+      },
+      "outputs": {
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "formula": "One centerline transverse load; choose coordinate plane; other transverse component and couples zero",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Single pump/impeller transverse force acting on shaft centerline; no off-axis couple.",
+      "enums": {
+        "plane": [
+          "y",
+          "z"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "check_speed_limit": {
+      "inputs": {
+        "speed": "shaft_speed",
+        "limit": "speed_limit"
+      },
+      "outputs": {
+        "ratio": "ratio"
+      },
+      "formula": "speed / catalog_limit",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Limit must come from the original question or an approved catalog row; ratio alone is not a whole-task judgment.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    }
+  },
+  "resources": {
+    "generic_Fa_C0_table": {
+      "source_id": "S1",
+      "version": "r25-verified-v1",
+      "locator": "table 11-1 rows/columns x,e,X2,Y2",
+      "sha256": "970932309a469b8d559cab56385ed880cd2d2fd2103723cf4f9e8152c759c291",
+      "quantity": {
+        "value": {
+          "index": "Fa/C0",
+          "lower_rule": "clamp_first",
+          "rows": [
+            {
+              "x": 0.014,
+              "e": 0.19,
+              "X": 0.56,
+              "Y": 2.3
+            },
+            {
+              "x": 0.021,
+              "e": 0.21,
+              "X": 0.56,
+              "Y": 2.15
+            },
+            {
+              "x": 0.028,
+              "e": 0.22,
+              "X": 0.56,
+              "Y": 1.99
+            },
+            {
+              "x": 0.042,
+              "e": 0.24,
+              "X": 0.56,
+              "Y": 1.85
+            },
+            {
+              "x": 0.056,
+              "e": 0.26,
+              "X": 0.56,
+              "Y": 1.71
+            },
+            {
+              "x": 0.07,
+              "e": 0.27,
+              "X": 0.56,
+              "Y": 1.63
+            },
+            {
+              "x": 0.084,
+              "e": 0.28,
+              "X": 0.56,
+              "Y": 1.55
+            },
+            {
+              "x": 0.11,
+              "e": 0.3,
+              "X": 0.56,
+              "Y": 1.45
+            },
+            {
+              "x": 0.17,
+              "e": 0.34,
+              "X": 0.56,
+              "Y": 1.31
+            },
+            {
+              "x": 0.28,
+              "e": 0.38,
+              "X": 0.56,
+              "Y": 1.15
+            },
+            {
+              "x": 0.42,
+              "e": 0.42,
+              "X": 0.56,
+              "Y": 1.04
+            },
+            {
+              "x": 0.56,
+              "e": 0.44,
+              "X": 0.56,
+              "Y": 1.0
+            }
+          ]
+        },
+        "unit": "table",
+        "quantity_type": "coefficient_table"
+      }
+    },
+    "NSK_ABLE_traditional.a1.90": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/90",
+      "sha256": "b8e9191dd3c39581486924d596cadcb08140fa37d31edb4519a4994ccf0dbe86",
+      "quantity": {
+        "value": 1,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=90",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "NSK_ABLE_traditional.a1.95": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/95",
+      "sha256": "adc8bef5c15987835ff82a2b67b56ca8edf3c5fc80c5922b5ea97b0123cf47e3",
+      "quantity": {
+        "value": 0.62,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=95",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "NSK_ABLE_traditional.a1.96": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/96",
+      "sha256": "b8e163417e7d1fff49af5fb8f9d60aabefa7206b2e85a6faba2391a79840b3ad",
+      "quantity": {
+        "value": 0.53,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=96",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "NSK_ABLE_traditional.a1.97": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/97",
+      "sha256": "2a7d9b8e33cec605d61c4c7181b130800b6462178fd607183a11d2e424c9486b",
+      "quantity": {
+        "value": 0.44,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=97",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "NSK_ABLE_traditional.a1.98": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/98",
+      "sha256": "7378595584d1eacecb03b2b75bfae5ac750e1a8178c1465abbea5b7965b6bf64",
+      "quantity": {
+        "value": 0.33,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=98",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "NSK_ABLE_traditional.a1.99": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "NSK_ABLE_traditional/99",
+      "sha256": "c9a1a116f6243549d2e0a8b282beabce916d4f2525d5128eec09782c27288a84",
+      "quantity": {
+        "value": 0.21,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=99",
+          "version=NSK_ABLE_traditional"
+        ]
+      }
+    },
+    "ISO281_2007.a1.90": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/90",
+      "sha256": "f2ef18f5d23b7aa253ad90f80a99a6999a0a9466db074b49b4721bff74357201",
+      "quantity": {
+        "value": 1,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=90",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "ISO281_2007.a1.95": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/95",
+      "sha256": "8dd26b2587d029aea0792b868d36d54c040815cd23315a4eb1a2befe0db4ad72",
+      "quantity": {
+        "value": 0.64,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=95",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "ISO281_2007.a1.96": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/96",
+      "sha256": "d5a0932a17ccfe64196903943cb530da0a5eb7cb506599e7fbbb85ce6ca2d2b3",
+      "quantity": {
+        "value": 0.55,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=96",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "ISO281_2007.a1.97": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/97",
+      "sha256": "73bc3852be1406ae70bc5748454514f14d5ebccd67b7df8f49c94d7f8f7a2e08",
+      "quantity": {
+        "value": 0.47,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=97",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "ISO281_2007.a1.98": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/98",
+      "sha256": "04b46b84de7cb56bb52269944c6e66fe365230b902eaa04aa0440e525a4f2bea",
+      "quantity": {
+        "value": 0.37,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=98",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "ISO281_2007.a1.99": {
+      "source_id": "S5",
+      "version": "r25-verified-v1",
+      "locator": "ISO281_2007/99",
+      "sha256": "3bbc5dbcb91ca89219717a4c92b4d257bfe6ac47e2aa6c46a60f09c5a43c6924",
+      "quantity": {
+        "value": 0.25,
+        "unit": "1",
+        "quantity_type": "reliability_factor",
+        "conditions": [
+          "reliability_percent=99",
+          "version=ISO281_2007"
+        ]
+      }
+    },
+    "rotation_inner": {
+      "source_id": "S1",
+      "version": "r25-verified-v1",
+      "locator": "rotation convention",
+      "quantity": {
+        "value": 1,
+        "unit": "1",
+        "quantity_type": "rotation_factor",
+        "conditions": [
+          "inner ring rotates with analyzed shaft"
+        ]
+      },
+      "sha256": "bf21e7ea105d6d5d3747c000f67c715e5c4f38d19ee3e85e58c332798cf2f6f6"
+    },
+    "load_factor_unity": {
+      "source_id": "S1",
+      "version": "r25-verified-v1",
+      "locator": "unfactored actual steady load",
+      "quantity": {
+        "value": 1,
+        "unit": "1",
+        "quantity_type": "load_factor",
+        "conditions": [
+          "actual steady loads; no additional given load factor"
+        ]
+      },
+      "sha256": "4dfcd40662953c71759e15398aaaf0f271c5e3b265173a49fe5e6f7f5dbdfe52"
+    }
+  },
+  "policies": [
+    "Question-given tables override generic tables; approved index and endpoint policy required.",
+    "Unknown reliability version: show both named versions without mapping Tallian to one column.",
+    "Unspecified axial couple sign: preserve both physical signs in one bounded batch.",
+    "Numeric dimension and midpoint wording conflict: retain original; numeric geometry primary and conditional midpoint result.",
+    "Do not invent static acceptance threshold; report s0 and condition.",
+    "Motor speed transfers only with explicit analyzed-shaft linkage."
+  ]
+}

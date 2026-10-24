@@ -1,0 +1,31 @@
+{
+  "version": "w2-interface-engineering-r1",
+  "status": "OFFLINE_ENGINEERING_REVISION_NOT_MODEL_CONFIRMED",
+  "python": "3.11+ standard library",
+  "paid_execution_enabled": false,
+  "files": {
+    "references/execution-contract.json": "82d1e712af1b913d05964fb8d0607f88d67332e5c7ca5c250efee10814beba57",
+    "references/problem-spec-base.json": "84efa6263557ae663f37344abdb33e65e844a268452740f6c8a6ea7867c110f9",
+    "references/prompts.json": "ca97be19cbc1bcb8c48657d2455c3d91f8cfc84b8c057484180d54415efd2741",
+    "references/resources.json": "4bb3ba0146870d299e836970133a4bead9ab5d89ff6aca7ba8443d5acf4788c1",
+    "references/runtime_facts.json": "e2e2ecec522ad02e04ab19a0bfdb8ba60ba4be1de6ecf712cc9142fca9517066",
+    "references/schemas/direct_bearing_loads.json": "a57bcb5fd39b97fb09ab03b49a30a2055acb293d74b0c1496942c36f9505c2f5",
+    "references/schemas/two_supports_single_helical_gear.json": "47d89f41fc1863c3371cafe405d81ebb28bdf70579e31f3a490adc2bd67b3905",
+    "references/schemas/two_supports_single_transverse_load.json": "a9e4d23bec38f0fb64876c941237e72efee4239183ed9723009a269ce9ac7873",
+    "references/scope.json": "b99fd99f168a79627b1cdcedab173743f7d036e3dc2dfbc7c37fe14b5e1af81f",
+    "references/sources.json": "d0ccde4e4ffe8a8baf9b83cc1fc35b07c74b660ec283377c0ee57cae8db152a6",
+    "scripts/bearing_w2/__init__.py": "708ba6fbd510b8f8231a3e9c9a4f6cad68f301e933bf21e7f024405b6c03df15",
+    "scripts/bearing_w2/common.py": "3cc9d7d31a0d7037e7743b38fafe7b4923bdffc4a22c5a9758026b19ba51742c",
+    "scripts/bearing_w2/interface_revision/__init__.py": "530da990174cba0e6cd0ce53e46075da45de43abd12c743dc3232c2a65bbce4d",
+    "scripts/bearing_w2/interface_revision/contract.py": "78e8c9483aa987b5a5cb4737e34f693ec79baf72293c48c489b4f529f0f9a6e9",
+    "scripts/bearing_w2/interface_revision/execution.py": "14a21e4f6f940cd461ba1525c23299c1d63eb09edb642c0eb5b8df55c2e240d8",
+    "scripts/bearing_w2/interface_revision/runtime.py": "fcf40588de0f7c386cc69316b97e45f688c0fb38c70fcd4be496a579014cef54",
+    "scripts/bearing_w2/interface_revision/validation.py": "c63da2912909d7646d9618aa934812655178bb2ffbf8eec01ae993ebce73c731",
+    "scripts/bearing_w2/kernels.py": "1b37728c8c66e5e19093b82af3c95240f6df6c132e0d1978ab99c7df3c9442b7",
+    "scripts/bearing_w2/registry.py": "f464ba147e5a3eee446d7d1bca8c89ee6cf662340d437e4d50ff371a239a24d6",
+    "scripts/bearing_w2/schema.py": "14d465b5fa309140717e6023406989e9abbaa433f6e2f04d04b2afa01108d896",
+    "scripts/run.py": "2111524c158e0aa88d09ee8972a72c18c5009fc83b4abbe358fe969e02c0dd7e",
+    "scripts/self_check.py": "02c9a37b9c1ec3c21d213fbf96f1839957356e42910f57295e7bf70dfb870759",
+    "SKILL.md": "39a79fc6f38f255f13c985f39d9d63eb25df4c9b5341a1f42185e53abb6e24d7"
+  }
+}

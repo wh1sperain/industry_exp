@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Industrial W2 problem specification",
+  "description": "本schema仅验证语法形状。来源、量纲、对象、作用轴、适用域及设计变量许可须由宿主做语义检查。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "skill_id",
+    "branch_id",
+    "objects",
+    "requested_outputs",
+    "inputs",
+    "design_choices",
+    "missing_inputs",
+    "scenario_axes",
+    "steps"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "skill_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "branch_id": {
+      "enum": [
+        "direct_bearing_loads",
+        "two_supports_single_transverse_load",
+        "two_supports_single_helical_gear"
+      ]
+    },
+    "objects": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "object_id",
+          "object_type",
+          "evidence_spans"
+        ],
+        "properties": {
+          "object_id": {
+            "type": "string"
+          },
+          "object_type": {
+            "enum": [
+              "single_row_deep_groove",
+              "shaft",
+              "single_helical_gear",
+              "pump_transverse_load",
+              "bearing_support"
+            ]
+          },
+          "evidence_spans": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "requested_outputs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 16,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "input_id",
+          "object_id",
+          "quantity_type",
+          "value",
+          "unit",
+          "source_span_id",
+          "quote"
+        ],
+        "properties": {
+          "input_id": {
+            "type": "string"
+          },
+          "object_id": {
+            "type": "string"
+          },
+          "quantity_type": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "string"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          },
+          "source_span_id": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "design_choices": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "choice_id",
+          "value",
+          "unit",
+          "allowed_by_span",
+          "basis_resource"
+        ],
+        "properties": {
+          "choice_id": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "string"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          },
+          "allowed_by_span": {
+            "type": "string"
+          },
+          "basis_resource": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "missing_inputs": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "affects_outputs",
+          "available_resource_id"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "affects_outputs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "available_resource_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "scenario_axes": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "axis_id",
+          "values",
+          "basis_spans"
+        ],
+        "properties": {
+          "axis_id": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 4,
+            "items": {
+              "type": "string"
+            }
+          },
+          "basis_spans": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "step_id",
+          "relation_id",
+          "arguments",
+          "output_ids"
+        ],
+        "properties": {
+          "step_id": {
+            "type": "string"
+          },
+          "relation_id": {
+            "type": "string"
+          },
+          "arguments": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "input_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "input_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "choice_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "choice_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "scenario_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "scenario_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "step_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "step_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "resource_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "resource_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "constant_ref": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "constant_ref"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "enum": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "enum"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "output_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-semantic-checks": [
+    "所有对象/输入/步骤标识唯一",
+    "given值与原文绑定一致",
+    "设计选择不能覆盖给定输入",
+    "step_ref必须指向前驱并无循环",
+    "scenario_axes笛卡尔积不超过4",
+    "resource_ref必须属于批准版本",
+    "enum和constant_ref由关系schema限定",
+    "深沟球关系不得用于角接触或滚子",
+    "必须处理全部所求或明确缺项",
+    "不得在任何字段携带评测答案/分数"
+  ]
+}

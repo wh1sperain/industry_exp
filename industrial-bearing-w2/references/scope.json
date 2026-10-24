@@ -1,0 +1,54 @@
+{
+  "name": "given_capacity_single_row_deep_groove_life",
+  "required_objects": [
+    "single_row_deep_groove",
+    "given_dynamic_C",
+    "given_static_C0",
+    "analysis_shaft_speed"
+  ],
+  "tasks_any": [
+    "dynamic_load",
+    "life",
+    "reliability",
+    "static_safety"
+  ],
+  "input_branches": [
+    "direct_bearing_loads",
+    "two_supports_single_transverse_load",
+    "two_supports_single_helical_gear"
+  ],
+  "excluded": [
+    "unknown_output_shaft_speed",
+    "angular_contact",
+    "tapered_roller",
+    "thrust_bearing",
+    "three_supports",
+    "overhung",
+    "multiple_gears",
+    "combined_pulley_gear",
+    "catalog_selection",
+    "thermal_clearance",
+    "material_selection",
+    "lubrication_design",
+    "accumulated_damage_remaining_life",
+    "variable_duty_cycle"
+  ],
+  "no_case_id_routing": true,
+  "version": "w2-interface-engineering-r1",
+  "matching_establishes_readiness": false,
+  "exclusion_patterns": {
+    "other_bearing_type": "angular.contact|tapered|thrust.ball|角接触|圆锥滚子|推力球",
+    "damage_or_variable_load": "Miner|variable.{0,12}load|duty.cycles?|remaining.life|accumulated.damage|变载|剩余寿命|累积损伤",
+    "unsupported_shaft": "three.bearings?|three.supports?|overhung|cantilever|multiple.gears|planetary|pulley|belt|三支承|悬臂|多齿轮|带轮|带传动",
+    "catalog_selection": "\\bselect\\b.{0,25}(?:suitable|appropriate|bearing from|from.{0,15}catalog)|choose.{0,20}bearing|选择轴承型号|轴承选型",
+    "other_deliverables": "heat.treat|thermal.clearance|lubrication.design|material.selection|热处理|游隙计算|润滑设计|材料选择",
+    "unknown_output_speed": "output.shaft|输出轴"
+  },
+  "negative_examples": [
+    "deep groove ball bearing C=30kN C0=20kN at 1000rpm remaining life after accumulated damage",
+    "angular contact bearing C=30kN C0=20kN at 1000rpm life",
+    "deep groove ball bearing C=30kN C0=20kN 1000rpm helical gear pulley life",
+    "deep groove ball bearing C=30kN C0=20kN 1000rpm variable load life",
+    "deep groove ball bearing C=30kN C0=20kN motor 2900rpm output shaft life"
+  ]
+}

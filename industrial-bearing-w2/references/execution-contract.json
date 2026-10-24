@@ -1,0 +1,657 @@
+{
+  "engineering_revision": "w2-interface-engineering-r1",
+  "skill_id": "given-capacity-v1",
+  "identity_policy": "skill_id is exact. Engineering revision is separate host/cache metadata.",
+  "limits": {
+    "declared_nodes": 24,
+    "scenario_axes": 2,
+    "scenarios": 4,
+    "expanded_nodes": 96,
+    "local_seconds": 5,
+    "return_utf8_bytes": 24576,
+    "semantic_calls": 2
+  },
+  "objects": {
+    "evidence_regex_case_insensitive": {
+      "single_row_deep_groove": "deep.groove.*ball|深沟球",
+      "single_helical_gear": "helical|pinion|斜齿轮",
+      "shaft": "shaft|轴",
+      "pump_transverse_load": "pump|impeller|泵",
+      "bearing_support": "bearing|轴承"
+    },
+    "evidence_rule": "Every evidence_spans ID must exist in the original question; its text must support the declared object type. An inferred auxiliary shaft is not required for given bearing loads.",
+    "direct_load_guidance": "Use the supported bearing object for the bearing operating speed. The existing quantity identifier shaft_speed also represents that speed; it does not require a shaft object. Do not declare unused inferred objects."
+  },
+  "inputs": {
+    "quantity_label_regex_case_insensitive": {
+      "dynamic_capacity": "(?:\\bC(?!0)\\s*=|dynamic\\s+(?:load\\s+)?(?:rating|capacity)|额定动载|动额定)",
+      "static_capacity": "(?:\\bC0\\s*=|static\\s+(?:load\\s+)?(?:rating|capacity)|额定静载|静额定)",
+      "radial_load": "radial|Fr|径向",
+      "axial_load": "axial|thrust|Fa|轴向",
+      "shaft_speed": "rpm|r/min|rev/min|转速",
+      "power": "kW|watt|功率",
+      "speed_limit": "limit speed|限速|极限转速",
+      "diameter": "diameter|直径",
+      "span": "span|spaced|跨度|间距",
+      "position": "from|located|position|距|位置",
+      "normal_pressure_angle": "normal pressure angle|法向压力角",
+      "helix_angle": "helix angle|螺旋角",
+      "target_hours": "life|operate|运行|寿命|hours",
+      "rotation_factor": "rotation|旋转",
+      "load_factor": "load factor|shock factor|载荷系数|冲击系数",
+      "reliability_factor": "a1|reliability|可靠度"
+    },
+    "allowed_object_types": {
+      "dynamic_capacity": [
+        "single_row_deep_groove"
+      ],
+      "static_capacity": [
+        "single_row_deep_groove"
+      ],
+      "radial_load": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "axial_load": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "shaft_speed": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "power": [
+        "single_helical_gear",
+        "shaft"
+      ],
+      "speed_limit": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "diameter": [
+        "single_helical_gear"
+      ],
+      "span": [
+        "shaft"
+      ],
+      "position": [
+        "shaft"
+      ],
+      "normal_pressure_angle": [
+        "single_helical_gear"
+      ],
+      "helix_angle": [
+        "single_helical_gear"
+      ],
+      "target_hours": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "rotation_factor": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "load_factor": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ],
+      "reliability_factor": [
+        "bearing_support",
+        "pump_transverse_load",
+        "shaft",
+        "single_helical_gear",
+        "single_row_deep_groove"
+      ]
+    },
+    "nearest_label_groups": {
+      "radial_load": [
+        "radial|径向|\\bFr\\b",
+        "axial|thrust|轴向|\\bFa\\b"
+      ],
+      "axial_load": [
+        "axial|thrust|轴向|\\bFa\\b",
+        "radial|径向|\\bFr\\b"
+      ],
+      "normal_pressure_angle": [
+        "normal pressure angle|法向压力角",
+        "helix angle|螺旋角"
+      ],
+      "helix_angle": [
+        "helix angle|螺旋角",
+        "normal pressure angle|法向压力角"
+      ],
+      "span": [
+        "span|spaced|跨度|间距",
+        "position|located|from the left|位置"
+      ]
+    },
+    "quantity_units": {
+      "dynamic_capacity": "N",
+      "static_capacity": "N",
+      "radial_load": "N",
+      "axial_load": "N",
+      "force": "N",
+      "equivalent_dynamic_load": "N",
+      "equivalent_static_load": "N",
+      "shaft_speed": "rpm",
+      "speed_limit": "rpm",
+      "power": "W",
+      "diameter": "m",
+      "span": "m",
+      "position": "m",
+      "normal_pressure_angle": "deg",
+      "helix_angle": "deg",
+      "moment": "N*m",
+      "life_hours": "h",
+      "target_hours": "h",
+      "reliability_factor": "1",
+      "rotation_factor": "1",
+      "load_factor": "1",
+      "coefficient": "1",
+      "safety_factor": "1",
+      "ratio": "1",
+      "coefficient_table": "table",
+      "direction": "enum",
+      "locating_end": "enum",
+      "geometry": "enum",
+      "plane": "enum",
+      "report": "json",
+      "label": "text"
+    },
+    "allowed_raw_units": [
+      "N",
+      "kN",
+      "m",
+      "mm",
+      "W",
+      "kW",
+      "rpm",
+      "r/min",
+      "rev/min",
+      "deg",
+      "°",
+      "rad",
+      "h",
+      "hours",
+      "1",
+      "%",
+      "N*m",
+      "N*mm"
+    ],
+    "numeric_binding": "Copy a numeric value and its adjacent original unit verbatim into a literal quote within source_span_id. Host performs conversion. Nearest matching quantity label must identify this number; C and C0 cannot be exchanged.",
+    "ownership": "Bearing A/B evidence cannot be swapped. Motor speed cannot substitute for unprovided output-shaft speed. Host-reviewed certificates, when present, bind the exact original input record.",
+    "optional_metadata": "Only registered quantity types are numeric inputs. Do not add diameter/width/reliability-percent metadata that no requested relation consumes; reliability factors and catalog coefficients use approved resources."
+  },
+  "allowed_relations_by_branch": {
+    "direct_bearing_loads": [
+      "lookup_coefficients",
+      "equivalent_dynamic_load",
+      "bearing_life_hours",
+      "reliability_life",
+      "equivalent_static_load",
+      "required_dynamic_rating",
+      "check_speed_limit"
+    ],
+    "two_supports_single_transverse_load": [
+      "lookup_coefficients",
+      "equivalent_dynamic_load",
+      "bearing_life_hours",
+      "reliability_life",
+      "equivalent_static_load",
+      "required_dynamic_rating",
+      "check_speed_limit",
+      "transverse_components",
+      "shaft_reactions_two_supports",
+      "resolve_axial_loads",
+      "check_equilibrium"
+    ],
+    "two_supports_single_helical_gear": [
+      "lookup_coefficients",
+      "equivalent_dynamic_load",
+      "bearing_life_hours",
+      "reliability_life",
+      "equivalent_static_load",
+      "required_dynamic_rating",
+      "check_speed_limit",
+      "gear_forces",
+      "axial_force_couple",
+      "geometry_position",
+      "shaft_reactions_two_supports",
+      "resolve_axial_loads",
+      "check_equilibrium"
+    ]
+  },
+  "relation_signatures": {
+    "gear_forces": {
+      "inputs": {
+        "power": "power",
+        "speed": "shaft_speed",
+        "diameter": "diameter",
+        "pressure_angle": "normal_pressure_angle",
+        "helix_angle": "helix_angle"
+      },
+      "outputs": {
+        "torque": "moment",
+        "Ft": "force",
+        "Fr": "radial_load",
+        "Fa": "axial_load",
+        "Fy": "force",
+        "Fz": "force"
+      },
+      "formula": "T=P/(2*pi*n/60); Ft=2*T/d; Fr=Ft*tan(alpha_n)/cos(beta); Fa=abs(Ft*tan(beta)); Fy=-Fr; Fz=-Ft",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Single external helical gear, explicit analyzed shaft speed. x along shaft; external Fy=-Fr, Fz=-Ft.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "axial_force_couple": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "diameter": "diameter",
+        "direction": "direction"
+      },
+      "outputs": {
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "formula": "r cross F: My=0; Mz=sign*Fa*d/2",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Contact offset is in y plane; record coordinate convention; unknown direction requires both signs.",
+      "enums": {
+        "direction": [
+          "positive",
+          "negative"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "shaft_reactions_two_supports": {
+      "inputs": {
+        "span": "span",
+        "position": "position",
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "outputs": {
+        "RAy": "force",
+        "RBy": "force",
+        "RAz": "force",
+        "RBz": "force",
+        "FrA": "radial_load",
+        "FrB": "radial_load"
+      },
+      "formula": "RBy=-(a*Fy+Mz)/L; RBz=(-a*Fz+My)/L; RA=-F-RB; Fr=hypot(Ry,Rz)",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "One applied transverse load, 0<=a<=L; all two-plane loads and free couples required.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "resolve_axial_loads": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "locating_end": "locating_end"
+      },
+      "outputs": {
+        "FaA": "axial_load",
+        "FaB": "axial_load"
+      },
+      "formula": "Locating end carries all external axial load; floating end carries zero",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Explicit locating/floating evidence. No induced-thrust formulas for other bearing types.",
+      "enums": {
+        "locating_end": [
+          "A",
+          "B"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "lookup_coefficients": {
+      "inputs": {
+        "axial_load": "axial_load",
+        "static_capacity": "static_capacity",
+        "table": "coefficient_table"
+      },
+      "outputs": {
+        "e": "coefficient",
+        "X": "coefficient",
+        "Y": "coefficient",
+        "index": "ratio",
+        "interpolation": "report"
+      },
+      "formula": "x=Fa/C0; interpolate table with its exact index and registered endpoint policy",
+      "sources": [
+        "S1",
+        "S3"
+      ],
+      "domain": "Ordinary single-row deep-groove ball; question table takes precedence. No f0 substitution or upper extrapolation.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "equivalent_dynamic_load": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "axial_load": "axial_load",
+        "rotation_factor": "rotation_factor",
+        "e": "coefficient",
+        "X": "coefficient",
+        "Y": "coefficient",
+        "load_factor": "load_factor"
+      },
+      "outputs": {
+        "P": "equivalent_dynamic_load",
+        "branch": "label"
+      },
+      "formula": "P=fp*(V*Fr if Fa<=e*V*Fr else X*V*Fr+Y*Fa)",
+      "sources": [
+        "S1",
+        "S2"
+      ],
+      "domain": "Load factor applied once; capacities are not applied loads.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "bearing_life_hours": {
+      "inputs": {
+        "dynamic_capacity": "dynamic_capacity",
+        "equivalent_load": "equivalent_dynamic_load",
+        "speed": "shaft_speed"
+      },
+      "outputs": {
+        "L10h": "life_hours"
+      },
+      "formula": "L10h=1e6/(60*n)*(C/P)^3",
+      "sources": [
+        "S2",
+        "bearing-shaft"
+      ],
+      "domain": "Ball bearings; C,P,n>0; 90 percent reliability.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "reliability_life": {
+      "inputs": {
+        "basic_life": "life_hours",
+        "factor": "reliability_factor"
+      },
+      "outputs": {
+        "LRh": "life_hours"
+      },
+      "formula": "LRh=a1*L10h",
+      "sources": [
+        "S5"
+      ],
+      "domain": "0<a1<=1, explicit source/table version; no unprovided aISO.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "equivalent_static_load": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "axial_load": "axial_load",
+        "static_capacity": "static_capacity"
+      },
+      "outputs": {
+        "P0": "equivalent_static_load",
+        "s0": "safety_factor"
+      },
+      "formula": "P0=max(Fr,.6*Fr+.5*Fa); s0=C0/P0",
+      "sources": [
+        "S4",
+        "S6"
+      ],
+      "domain": "Ordinary deep-groove ball; actual load; no invented acceptance threshold.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "required_dynamic_rating": {
+      "inputs": {
+        "target_hours": "target_hours",
+        "equivalent_load": "equivalent_dynamic_load",
+        "speed": "shaft_speed",
+        "factor": "reliability_factor"
+      },
+      "outputs": {
+        "C_required": "dynamic_capacity"
+      },
+      "formula": "Cmin=P*(H*60*n/(a1*1e6))^(1/3)",
+      "sources": [
+        "S2",
+        "S5"
+      ],
+      "domain": "Capacity requirement only; no catalog selection.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "check_equilibrium": {
+      "inputs": {
+        "span": "span",
+        "position": "position",
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment",
+        "RAy": "force",
+        "RBy": "force",
+        "RAz": "force",
+        "RBz": "force"
+      },
+      "outputs": {
+        "residuals": "report"
+      },
+      "formula": "Check both forces and moments against the independently bound load inventory",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "A zero residual does not by itself prove input completeness.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "geometry_position": {
+      "inputs": {
+        "span": "span",
+        "numeric_position": "position",
+        "geometry": "geometry"
+      },
+      "outputs": {
+        "position": "position"
+      },
+      "formula": "a=L/2 or explicit numeric position",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Conditional interpretation of explicit midpoint wording, kept separate from numeric dimensions.",
+      "enums": {
+        "geometry": [
+          "midpoint",
+          "numeric"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "transverse_components": {
+      "inputs": {
+        "radial_load": "radial_load",
+        "plane": "plane"
+      },
+      "outputs": {
+        "Fy": "force",
+        "Fz": "force",
+        "My": "moment",
+        "Mz": "moment"
+      },
+      "formula": "One centerline transverse load; choose coordinate plane; other transverse component and couples zero",
+      "sources": [
+        "support_equilibrium_derivation"
+      ],
+      "domain": "Single pump/impeller transverse force acting on shaft centerline; no off-axis couple.",
+      "enums": {
+        "plane": [
+          "y",
+          "z"
+        ]
+      },
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    },
+    "check_speed_limit": {
+      "inputs": {
+        "speed": "shaft_speed",
+        "limit": "speed_limit"
+      },
+      "outputs": {
+        "ratio": "ratio"
+      },
+      "formula": "speed / catalog_limit",
+      "sources": [
+        "bearing-shaft"
+      ],
+      "domain": "Limit must come from the original question or an approved catalog row; ratio alone is not a whole-task judgment.",
+      "enums": {},
+      "error_codes": [
+        "E_TYPE",
+        "E_UNIT",
+        "E_SOURCE",
+        "E_RANGE",
+        "E_MISSING"
+      ]
+    }
+  },
+  "compatible_quantity_types": {
+    "radial_load": [
+      "force"
+    ],
+    "force": [
+      "radial_load"
+    ]
+  },
+  "references": {
+    "step_ref": "step_id.output_id, declared strictly earlier; no aliases or forward/cyclic references",
+    "input_ref": "exact inputs.input_id",
+    "resource_ref": "exact approved key with source/version/hash/row/field identity",
+    "scenario_ref": "declared axis ID and its approved enum values",
+    "enum": "registered relation argument enum; fixed/locating end additionally needs original-question evidence",
+    "constant_ref": "disabled in the given-capacity revision",
+    "choice_ref": "disabled; given-capacity scope has no catalog design selection"
+  },
+  "source_policy": "Question coefficient tables take precedence. No guessed e/Y/C/C0/a1 values. Resource quantities and versions must match their frozen identities.",
+  "scenario_policy": "Unspecified gear-couple direction retains both signed cases. Conflicting numeric/midpoint positions retain both geometry cases. No merging mutually exclusive cases.",
+  "load_policy": "Gear support reactions consume both force planes and the axial-offset couple from registered upstream relations. A pump centerline force does not acquire a moment arm from shaft diameter. Independent source load inventory is checked at consumers.",
+  "delivery_policy": "requested_outputs matches the independent inventory. Tool success never proves the whole answer; report all successful values, conditions, failures and truly unknown quantities. No invented static acceptance threshold.",
+  "failure_policy": {
+    "global": "Malformed schema/IDs/references, missing scope object, source-version mismatch of interface, and global scenario/size constraints reject the batch.",
+    "local": "Object-evidence or numeric-input failures invalidate only owned inputs and their consumers. Failed nodes block descendants. Independent nodes still execute.",
+    "no_repair": "Host never deletes/rebinds objects, fills numbers or repairs a model plan. W2 remains exactly two semantic calls.",
+    "reporting": "Any local errors make batch PARTIAL even if unrelated calculations succeed; all diagnostics and blocked outputs are returned."
+  },
+  "same_for_G2_K2": true,
+  "new_engineering_relations": false
+}
